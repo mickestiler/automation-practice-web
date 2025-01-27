@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem 2: Search Functionality</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        form {
+            max-width: 400px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3498db;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .product {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+        .product h3 {
+            margin: 0;
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+<h1>Problem 2: Search Functionality</h1>
+<p><strong>Difficulty:</strong> Easy</p>
+
+<h2>Description</h2>
+<p>Automate searching for a product on an e-commerce homepage.</p>
+
+<h2>Objective</h2>
+<ul>
+    <li>Enter a product name into the search bar.</li>
+    <li>Submit the search query.</li>
+    <li>Verify that the search results page displays relevant products.</li>
+</ul>
+
+<h2>Search Products</h2>
+<form id="search-form">
+    <label for="search-input">Product Name:</label><br>
+    <input type="text" id="search-input" name="search-input" required><br><br>
+
+    <button type="submit">Search</button>
+</form>
+
+<div id="search-results" class="results"></div>
+
+<!-- JavaScript Timer -->
+<script>
+    // Initialize startTime variable
+    var startTime;
+
+    // Start the timer when the page loads
+    window.onload = function() {
+        startTime = new Date();
+    };
+
+    // Sample product data
+    var products = [
+        { name: 'Apple iPhone 14', description: 'Latest Apple smartphone.' },
+        { name: 'Samsung Galaxy S22', description: 'High-end Android phone.' },
+        { name: 'Sony WH-1000XM4', description: 'Noise-cancelling headphones.' },
+        { name: 'Apple MacBook Pro', description: 'Powerful laptop for professionals.' },
+        { name: 'Dell XPS 13', description: 'Compact and powerful ultrabook.' }
+    ];
+
+    // Add event listener for form submission
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the search query
+        var query = document.getElementById('search-input').value.toLowerCase();
+
+        // Filter products based on the query
+        var results = products.filter(function(product) {
+            return product.name.toLowerCase().includes(query);
+        });
+
+        // Display the results
+        displayResults(results);
+
+        // Capture the end time
+        var endTime = new Date();
+
+        // Calculate the time difference in seconds
+        var timeDiff = (endTime - startTime) / 1000;
+
+        // Calculate minutes and seconds
+        var minutes = Math.floor(timeDiff / 60);
+        var seconds = Math.round(timeDiff % 60);
+
+        // Display an alert with the time taken
+        alert('Search completed! You finished the problem in ' + minutes + ' minute(s) and ' + seconds + ' second(s).');
+    });
+
+    // Function to display search results
+    function displayResults(results) {
+        var resultsDiv = document.getElementById('search-results');
+        resultsDiv.innerHTML = ''; // Clear previous results
+
+        if (results.length === 0) {
+            resultsDiv.innerHTML = '<p>No products found.</p>';
+        } else {
+            results.forEach(function(product) {
+                var productDiv = document.createElement('div');
+                productDiv.className = 'product';
+
+                var productName = document.createElement('h3');
+                productName.textContent = product.name;
+
+                var productDesc = document.createElement('p');
+                productDesc.textContent = product.description;
+
+                productDiv.appendChild(productName);
+                productDiv.appendChild(productDesc);
+
+                resultsDiv.appendChild(productDiv);
+            });
+        }
+    }
+</script>
+</body>
+</html>

@@ -3,6 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Problem 1: Simple Login Form</title>
+    <style>
+        /* Existing CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        form {
+            max-width: 300px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3498db;
+        }
+    </style>
 </head>
 <body>
 <h1>Problem 1: Simple Login Form</h1>
@@ -29,38 +63,26 @@
     <button type="submit">Login</button>
 </form>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-    h1 {
-        color: #2c3e50;
-    }
-    form {
-        max-width: 300px;
-    }
-    label {
-        font-weight: bold;
-    }
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-    }
-    button {
-        padding: 10px 15px;
-        background-color: #2980b9;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #3498db;
-    }
-</style>
+<script>
+    var startTime;
+
+    window.onload = function() {
+        startTime = new Date();
+    };
+
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var endTime = new Date();
+
+        var timeDiff = (endTime - startTime) / 1000;
+
+        var minutes = Math.floor(timeDiff / 60);
+        var seconds = Math.round(timeDiff % 60);
+
+        alert('Congratulations! You completed the problem in ' + minutes + ' minute(s) and ' + seconds + ' second(s).');
+
+    });
+</script>
 </body>
 </html>

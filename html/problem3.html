@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Problem 3: Subscription Form with Validation</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    form {
+      max-width: 400px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3498db;
+    }
+    .success {
+      color: green;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+<h1>Problem 3: Subscription Form with Validation</h1>
+<p><strong>Difficulty:</strong> Easy</p>
+
+<h2>Description</h2>
+<p>Work with a newsletter subscription form that includes basic form validation.</p>
+
+<h2>Objective</h2>
+<ul>
+  <li>Enter an email address into the subscription form.</li>
+  <li>Submit the form.</li>
+  <li>Handle form validation messages (e.g., invalid email formats).</li>
+  <li>Verify the success message upon valid submission.</li>
+</ul>
+
+<h2>Subscription Form</h2>
+<form id="subscription-form">
+  <label for="email-input">Email Address:</label><br>
+  <input type="email" id="email-input" name="email-input" required><br>
+  <div id="error-message" class="error"></div>
+  <button type="submit">Subscribe</button>
+</form>
+<div id="success-message" class="success"></div>
+
+<!-- JavaScript Timer -->
+<script>
+  // Initialize startTime variable
+  var startTime;
+
+  // Start the timer when the page loads
+  window.onload = function() {
+    startTime = new Date();
+  };
+
+  // Add event listener for form submission
+  document.getElementById('subscription-form').addEventListener('submit', function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Get the email value
+    var emailField = document.getElementById('email-input');
+    var emailValue = emailField.value.trim();
+    var errorMessage = document.getElementById('error-message');
+    var successMessage = document.getElementById('success-message');
+
+    // Clear previous messages
+    errorMessage.textContent = '';
+    successMessage.textContent = '';
+
+    // Simple email validation regex
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(emailValue)) {
+      // Display error message
+      errorMessage.textContent = 'Please enter a valid email address.';
+    } else {
+      // Simulate successful subscription
+      successMessage.textContent = 'Thank you for subscribing!';
+
+      // Capture the end time
+      var endTime = new Date();
+
+      // Calculate the time difference in seconds
+      var timeDiff = (endTime - startTime) / 1000;
+
+      // Calculate minutes and seconds
+      var minutes = Math.floor(timeDiff / 60);
+      var seconds = Math.round(timeDiff % 60);
+
+      // Display an alert with the time taken
+      alert('Subscription successful! You completed the problem in ' + minutes + ' minute(s) and ' + seconds + ' second(s).');
+
+      // Optionally, reset the form
+      // document.getElementById('subscription-form').reset();
+    }
+  });
+</script>
+</body>
+</html>
